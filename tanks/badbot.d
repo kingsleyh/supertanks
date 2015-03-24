@@ -26,7 +26,7 @@ class StaticBot : Brain {
     command.speed=3;
     float x = sensors.position.x;
     float y = sensors.position.y;
-    if( x>= 1200 || y>=650 || x<=0 || y<=0 ){
+    if( x>= 1000 || y>=500 || x<=100 || y<=100 ){
       auto i = uniform(0, 180);
       command.heading = currentHeadingPlusDegrees(i);
     }
@@ -35,17 +35,19 @@ class StaticBot : Brain {
       Reflection reflection = reflections.front;
       float zero = sensors.heading.radians * Heading.ONE_DEGREE;
       float enemyDegrees = (reflection.heading.radians * Heading.ONE_DEGREE) + zero;
-      int offset=20;
+      int turretOffset=20;
+      int radarOffset=0;
       if( enemyDegrees >=0 && enemyDegrees<180 ){
-        command.turretHeading=currentRadarHeadingPlusDegrees(offset);  
+        command.turretHeading=currentRadarHeadingPlusDegrees(turretOffset);  
       }
       else if(enemyDegrees >= 181 && enemyDegrees<360 ){
-        command.turretHeading=currentRadarHeadingPlusDegrees(-offset);  
+        command.turretHeading=currentRadarHeadingPlusDegrees(-turretOffset);  
       } else {
         command.turretHeading=currentRadarHeadingPlusDegrees(0);          
       }
     }
-    command.radarHeading=currentRadarHeadingPlusDegrees(39);
+      command.radarHeading=currentRadarHeadingPlusDegrees(39);      
+    
 
     
     command.firePower = 1;
