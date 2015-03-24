@@ -60,7 +60,7 @@ class Runaway : Brain {
        Reflection reflection = reflections.front;
        command.radarHeading = reflection.heading;
        command.turretHeading = reflection.heading;
-       if(reflection.distance < 10){
+       if(reflection.distance < 80){
          command.firePower = maxFirePower;
        } else
        {
